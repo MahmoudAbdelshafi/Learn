@@ -9,10 +9,12 @@ import UIKit
 
 final class LessonsScenesDiContainer {
     
+    private static var lessonsResponseCache: CoreDataLessonsResponseStorage = CoreDataLessonsResponseStorage()
+    
     // MARK: - Repositories -
     
     static func makeDefaultLessonsRepository() -> LessonsRepository {
-        DefaultLessonsRepository(provider: Hover())
+        DefaultLessonsRepository(provider: Hover(), cache: lessonsResponseCache)
     }
     
     // MARK: - Use Cases -

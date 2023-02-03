@@ -8,8 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		E5539F07298D15B9002271C2 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F06298D15B9002271C2 /* DownloadManager.swift */; };
+		E5539F0E298D7FF9002271C2 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E5539F0C298D7FF9002271C2 /* CoreDataStorage.xcdatamodeld */; };
+		E5539F10298D8117002271C2 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F0F298D8117002271C2 /* CoreDataStorage.swift */; };
+		E5539F13298D8244002271C2 /* CoreDataLesson+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F11298D8244002271C2 /* CoreDataLesson+CoreDataClass.swift */; };
+		E5539F14298D8244002271C2 /* CoreDataLesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F12298D8244002271C2 /* CoreDataLesson+CoreDataProperties.swift */; };
+		E5539F16298D8421002271C2 /* LessonsResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F15298D8421002271C2 /* LessonsResponseStorage.swift */; };
+		E5539F18298D84D7002271C2 /* CoreDataLessonsResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F17298D84D7002271C2 /* CoreDataLessonsResponseStorage.swift */; };
 		E57B46E8298A808300E5DA64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57B46E6298A808300E5DA64 /* Main.storyboard */; };
-		E57B46EB298A808300E5DA64 /* Learn.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E57B46E9298A808300E5DA64 /* Learn.xcdatamodeld */; };
 		E57B46ED298A808400E5DA64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57B46EC298A808400E5DA64 /* Assets.xcassets */; };
 		E57B46F0298A808400E5DA64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57B46EE298A808400E5DA64 /* LaunchScreen.storyboard */; };
 		E57B46FB298A808400E5DA64 /* LearnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B46FA298A808400E5DA64 /* LearnTests.swift */; };
@@ -74,9 +79,14 @@
 
 /* Begin PBXFileReference section */
 		E5539F06298D15B9002271C2 /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		E5539F0D298D7FF9002271C2 /* CoreDataStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataStorage.xcdatamodel; sourceTree = "<group>"; };
+		E5539F0F298D8117002271C2 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		E5539F11298D8244002271C2 /* CoreDataLesson+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataLesson+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E5539F12298D8244002271C2 /* CoreDataLesson+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataLesson+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E5539F15298D8421002271C2 /* LessonsResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsResponseStorage.swift; sourceTree = "<group>"; };
+		E5539F17298D84D7002271C2 /* CoreDataLessonsResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataLessonsResponseStorage.swift; sourceTree = "<group>"; };
 		E57B46DD298A808300E5DA64 /* Learn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Learn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57B46E7298A808300E5DA64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E57B46EA298A808300E5DA64 /* Learn.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Learn.xcdatamodel; sourceTree = "<group>"; };
 		E57B46EC298A808400E5DA64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E57B46EF298A808400E5DA64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E57B46F1298A808400E5DA64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -150,6 +160,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E5539F08298D7F1E002271C2 /* PersistentStorages */ = {
+			isa = PBXGroup;
+			children = (
+				E5539F0B298D7F4D002271C2 /* Entities */,
+				E5539F0A298D7F47002271C2 /* LessonsResponseStorage */,
+				E5539F09298D7F40002271C2 /* CoreDataStorage */,
+			);
+			path = PersistentStorages;
+			sourceTree = "<group>";
+		};
+		E5539F09298D7F40002271C2 /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				E5539F0C298D7FF9002271C2 /* CoreDataStorage.xcdatamodeld */,
+				E5539F0F298D8117002271C2 /* CoreDataStorage.swift */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
+		E5539F0A298D7F47002271C2 /* LessonsResponseStorage */ = {
+			isa = PBXGroup;
+			children = (
+				E5539F15298D8421002271C2 /* LessonsResponseStorage.swift */,
+				E5539F17298D84D7002271C2 /* CoreDataLessonsResponseStorage.swift */,
+			);
+			path = LessonsResponseStorage;
+			sourceTree = "<group>";
+		};
+		E5539F0B298D7F4D002271C2 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				E5539F11298D8244002271C2 /* CoreDataLesson+CoreDataClass.swift */,
+				E5539F12298D8244002271C2 /* CoreDataLesson+CoreDataProperties.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		E57B46D4298A808300E5DA64 = {
 			isa = PBXGroup;
 			children = (
@@ -184,7 +231,6 @@
 				E57B4716298A80CC00E5DA64 /* SceneDelegate.swift */,
 				E57B4713298A80AB00E5DA64 /* DiContainer */,
 				E57B46E6298A808300E5DA64 /* Main.storyboard */,
-				E57B46E9298A808300E5DA64 /* Learn.xcdatamodeld */,
 				E57C9A73298ABEB600CBBA7E /* Extenstions */,
 			);
 			path = Application;
@@ -294,6 +340,7 @@
 			children = (
 				E57B4748298A81C100E5DA64 /* Repositories */,
 				E57B4749298A81D000E5DA64 /* Networking */,
+				E5539F08298D7F1E002271C2 /* PersistentStorages */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -589,23 +636,28 @@
 				E57C9A53298AA5FF00CBBA7E /* LessonDetailsViewController.swift in Sources */,
 				E57B472C298A817D00E5DA64 /* MethodType.swift in Sources */,
 				E5539F07298D15B9002271C2 /* DownloadManager.swift in Sources */,
+				E5539F13298D8244002271C2 /* CoreDataLesson+CoreDataClass.swift in Sources */,
+				E5539F10298D8117002271C2 /* CoreDataStorage.swift in Sources */,
 				E57B472E298A817D00E5DA64 /* AuthProviderType.swift in Sources */,
 				E57C9A3A298A8EAE00CBBA7E /* LessonsRepository.swift in Sources */,
 				E57B471B298A80CC00E5DA64 /* AppConfiguration.swift in Sources */,
 				E57C9A41298A93D100CBBA7E /* FetchLessonsUseCase.swift in Sources */,
+				E5539F0E298D7FF9002271C2 /* CoreDataStorage.xcdatamodeld in Sources */,
+				E5539F18298D84D7002271C2 /* CoreDataLessonsResponseStorage.swift in Sources */,
 				E57B471A298A80CC00E5DA64 /* SceneDelegate.swift in Sources */,
 				E57B473D298A819200E5DA64 /* Preferrence.swift in Sources */,
 				E57B4743298A819900E5DA64 /* AnyEncodable.swift in Sources */,
 				E57B4719298A80CC00E5DA64 /* AppDelegate.swift in Sources */,
 				E57C9A34298A8C2000CBBA7E /* NetworkTarget+AppConfigs.swift in Sources */,
 				E57B4754298A823100E5DA64 /* MainLessonsHostingController.swift in Sources */,
+				E5539F14298D8244002271C2 /* CoreDataLesson+CoreDataProperties.swift in Sources */,
 				E57B473E298A819200E5DA64 /* HoverDebugger.swift in Sources */,
 				E57C9AA1298BE3B300CBBA7E /* DownloadProgressData.swift in Sources */,
 				E57B4756298A823700E5DA64 /* MainLessonsViewModel.swift in Sources */,
 				E57C9A76298AFD2F00CBBA7E /* DownloadLessonVideoUseCase.swift in Sources */,
-				E57B46EB298A808300E5DA64 /* Learn.xcdatamodeld in Sources */,
 				E57C9A3F298A8FF800CBBA7E /* Lesson.swift in Sources */,
 				E57B4738298A818C00E5DA64 /* Hover.swift in Sources */,
+				E5539F16298D8421002271C2 /* LessonsResponseStorage.swift in Sources */,
 				E57B4744298A819900E5DA64 /* NetworkTarget.swift in Sources */,
 				E57B4732298A818500E5DA64 /* URL+GenerateURLQuery.swift in Sources */,
 				E57B4718298A80CC00E5DA64 /* AppFlowCoordinator.swift in Sources */,
@@ -970,13 +1022,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		E57B46E9298A808300E5DA64 /* Learn.xcdatamodeld */ = {
+		E5539F0C298D7FF9002271C2 /* CoreDataStorage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				E57B46EA298A808300E5DA64 /* Learn.xcdatamodel */,
+				E5539F0D298D7FF9002271C2 /* CoreDataStorage.xcdatamodel */,
 			);
-			currentVersion = E57B46EA298A808300E5DA64 /* Learn.xcdatamodel */;
-			path = Learn.xcdatamodeld;
+			currentVersion = E5539F0D298D7FF9002271C2 /* CoreDataStorage.xcdatamodel */;
+			path = CoreDataStorage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
