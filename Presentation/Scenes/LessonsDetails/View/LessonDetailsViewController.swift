@@ -13,13 +13,14 @@ import AVKit
 struct LessonDetailsViewControllerWrapper: UIViewControllerRepresentable {
     
     let lesson: Lesson
+    let nextLessons: [Lesson]
     
     class Coordinator {
         var parentObserver: NSKeyValueObservation?
     }
     
     func makeUIViewController(context: Context) -> UIViewController {
-        let viewController = LessonsScenesDiContainer.makeLessonDetailsViewController(lesson: lesson)
+        let viewController = LessonsScenesDiContainer.makeLessonDetailsViewController(lesson: lesson , nextLessons: nextLessons)
         context.coordinator.parentObserver = viewController.observe(\.parent, changeHandler: { vc, _ in
             vc.parent?.title = vc.title
             vc.parent?.navigationItem.rightBarButtonItems = vc.navigationItem.rightBarButtonItems 
@@ -65,7 +66,7 @@ class LessonDetailsViewController: UIViewController {
     private lazy var videoButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
-        button.addTarget(self, action: #selector(didClickVideoThumbnailButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -101,6 +102,20 @@ class LessonDetailsViewController: UIViewController {
         return label
     }()
     
+    private lazy var nextLessonButton: UIButton = {
+        var filled = UIButton.Configuration.plain()
+        filled.title = "Next Lesson"
+        filled.buttonSize = .large
+        filled.image = UIImage(systemName: "chevron.right")
+        filled.imagePlacement = .trailing
+        filled.imagePadding = 5
+        let button = UIButton(configuration: filled, primaryAction: nil)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.tintColor = .systemBlue
+        button.addTarget(self, action: #selector(nextLessonButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     //MARK: - View Life Cycle -
     
     override func viewDidLoad() {
@@ -129,7 +144,7 @@ class LessonDetailsViewController: UIViewController {
 
 extension LessonDetailsViewController: AVPlayerViewControllerDelegate {
     
-    @objc private func didClickVideoThumbnailButton(_ sender: Any) {
+    @objc private func playButtonPressed(_ sender: Any) {
         playVideo()
     }
     
@@ -143,15 +158,24 @@ extension LessonDetailsViewController: AVPlayerViewControllerDelegate {
         showDownloadBtn()
     }
     
+    @objc private func nextLessonButtonPressed(_ sender: Any) {
+        navigateToNextLesson()
+    }
+    
     private func setupUI() {
         contentView.addSubview(videoThumbnailImg)
         contentView.addSubview(playerIconImage)
         contentView.addSubview(videoButton)
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)
+        contentView.addSubview(nextLessonButton)
         setupScrollView()
         setupConstraints()
         setupNavigationBarDownloadButton()
+        if viewModel.nextLessons.isEmpty {
+            nextLessonButton.isHidden = true
+        }
+        view.backgroundColor = .systemBackground
     }
     
     private func showDownloadProgressView() {
@@ -195,8 +219,13 @@ extension LessonDetailsViewController: AVPlayerViewControllerDelegate {
         descriptionLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 16).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16).isActive = true
-        descriptionLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -24).isActive = true
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        nextLessonButton.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor, constant: 24).isActive = true
+        nextLessonButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16).isActive = true
+        nextLessonButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 24).isActive = true
+        nextLessonButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        nextLessonButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupScrollView(){
@@ -261,8 +290,12 @@ extension LessonDetailsViewController: AVPlayerViewControllerDelegate {
     }
     
     private func bind() {
+        //: - downLoadProgressData
         viewModel.downLoadProgressData.sink { _ in
         } receiveValue: { [weak self] progressData in
+            if progressData.downloadTask.state == .running {
+                self?.showDownloadProgressView()
+            }
             let calculatedProgress = Float(progressData.totalBytesWritten) / Float(progressData.totalBytesExpectedToWrite)
             self?.progressView.progress = calculatedProgress
             if progressData.totalBytesWritten == progressData.totalBytesExpectedToWrite {
@@ -270,11 +303,20 @@ extension LessonDetailsViewController: AVPlayerViewControllerDelegate {
             }
         }.store(in: &viewModel.cancellableBag)
         
+        //: - isVideoDownloadedBefore
         viewModel.isVideoDownloadedBefore.sink { bool in
             if bool {
                 self.rightBarButton.isHidden = true
             }
         }.store(in: &viewModel.cancellableBag)
+    }
+    
+    private func navigateToNextLesson() {
+        var filtertedNextLessons = viewModel.nextLessons
+        filtertedNextLessons.removeFirst()
+        let viewController = LessonsScenesDiContainer.makeLessonDetailsViewController(lesson: viewModel.nextLessons.first!,
+                                                                                      nextLessons: filtertedNextLessons)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
 }

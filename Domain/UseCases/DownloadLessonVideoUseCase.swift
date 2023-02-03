@@ -13,11 +13,12 @@ protocol DownloadLessonVideoUseCase {
     func isVideoExist(destinationPath: String) -> Bool
     func localFilePath(for url: URL) -> URL?
     func getDownloadProgress() -> AnyPublisher<DownloadProgressData, Never>
-    func cancelDownLoad()
+    func cancelDownLoad(url: String)
+    func checkVideoStatus(videoURl: String)
 }
 
 final class DefaultDownloadLessonVideoUseCase: DownloadLessonVideoUseCase {
-
+ 
     var downloadStreamProgress = PassthroughSubject<DownloadProgressData, Never>()
     
     //MARK: - Properties -
@@ -36,8 +37,8 @@ final class DefaultDownloadLessonVideoUseCase: DownloadLessonVideoUseCase {
         lessonsRepository.downloadLessonVideo(videoURL: videoURL)
     }
     
-    func cancelDownLoad() {
-        lessonsRepository.cancelDownLoad()
+    func cancelDownLoad(url: String) {
+        lessonsRepository.cancelDownLoad(url: url)
     }
     
     func getDownloadProgress() -> AnyPublisher<DownloadProgressData, Never> {
@@ -51,4 +52,9 @@ final class DefaultDownloadLessonVideoUseCase: DownloadLessonVideoUseCase {
     func localFilePath(for url: URL) -> URL? {
         lessonsRepository.localFilePath(for: url)
     }
+    
+    func checkVideoStatus(videoURl: String) {
+        lessonsRepository.checkVideoStatus(videoURl: videoURl)
+    }
+    
 }

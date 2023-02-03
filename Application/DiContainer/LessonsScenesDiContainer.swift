@@ -31,8 +31,10 @@ final class LessonsScenesDiContainer {
         DefaultMainLessonsViewModel(fetchLessonsUseCase: makeDefaultFetchLessonsUseCase())
     }
     
-   static func makeDefaultLessonDetailsViewModel(lesson: Lesson) -> LessonDetailsViewModel {
-       DefaultLessonDetailsViewModel(downloadLessonVideoUseCase: makeDefaultDownloadLessonVideoUseCase(), lesson: lesson)
+   static func makeDefaultLessonDetailsViewModel(lesson: Lesson, nextLessons: [Lesson]) -> LessonDetailsViewModel {
+       DefaultLessonDetailsViewModel(downloadLessonVideoUseCase: makeDefaultDownloadLessonVideoUseCase(),
+                                     lesson: lesson,
+                                     nextLessons: nextLessons)
     }
     
 }
@@ -41,8 +43,8 @@ final class LessonsScenesDiContainer {
 
 extension LessonsScenesDiContainer: LessonsScenesFlowCoordinatorDependencies {
     
-   static func makeLessonDetailsViewController(lesson: Lesson) -> LessonDetailsViewController {
-       LessonDetailsViewController(viewModel: makeDefaultLessonDetailsViewModel(lesson: lesson))
+   static func makeLessonDetailsViewController(lesson: Lesson, nextLessons: [Lesson]) -> LessonDetailsViewController {
+       LessonDetailsViewController(viewModel: makeDefaultLessonDetailsViewModel(lesson: lesson, nextLessons: nextLessons))
     }
     
     func makeMainLessonsHostingController() -> MainLessonsHostingController {

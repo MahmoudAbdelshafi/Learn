@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol LessonsScenesFlowCoordinatorDependencies {
     func makeMainLessonsHostingController() -> MainLessonsHostingController
-   static func makeLessonDetailsViewController(lesson: Lesson) -> LessonDetailsViewController
+   static func makeLessonDetailsViewController(lesson: Lesson, nextLessons: [Lesson]) -> LessonDetailsViewController
 }
 
 final class LessonsScenesCoordinator {

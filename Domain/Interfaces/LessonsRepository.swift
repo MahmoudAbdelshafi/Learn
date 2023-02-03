@@ -13,6 +13,7 @@ protocol LessonsRepository {
     func downloadLessonVideo(videoURL: String)
     func isVideoExist(destinationPath: String) -> Bool
     func localFilePath(for url: URL) -> URL?
-    func cancelDownLoad()
+    func cancelDownLoad(url: String)
+    func checkVideoStatus(videoURl: String)
     var downloadStreamProgress: PassthroughSubject<DownloadProgressData,Never> { get set }
 }

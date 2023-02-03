@@ -17,6 +17,7 @@ protocol LessonDetailsViewModelInput {
     func viewDidLoad()
     func cancelDownLoad()
     var lesson: Lesson { get }
+    var nextLessons: [Lesson] { get }
     var lessonVideoLocalURL: URL? { get }
     var downLoadProgressData: PassthroughSubject<DownloadProgressData,Never> { get }
     var cancellableBag: Set<AnyCancellable> { get set }
@@ -34,6 +35,7 @@ final class DefaultLessonDetailsViewModel: LessonDetailsViewModel {
     //MARK: - Properties -
     
     let lesson: Lesson
+    let nextLessons: [Lesson]
     var lessonVideoLocalURL: URL?
     var cancellableBag = Set<AnyCancellable>()
     var downLoadProgressData = PassthroughSubject<DownloadProgressData, Never>()
@@ -43,9 +45,11 @@ final class DefaultLessonDetailsViewModel: LessonDetailsViewModel {
     //MARK: - Init -
     
     init(downloadLessonVideoUseCase: DownloadLessonVideoUseCase,
-         lesson: Lesson) {
+         lesson: Lesson,
+         nextLessons: [Lesson]) {
         self.downloadLessonVideoUseCase = downloadLessonVideoUseCase
         self.lesson = lesson
+        self.nextLessons = nextLessons
         observeOnDownloadProgress()
     }
     
@@ -62,9 +66,8 @@ extension DefaultLessonDetailsViewModel {
     }
     
     func cancelDownLoad() {
-        downloadLessonVideoUseCase.cancelDownLoad()
+        downloadLessonVideoUseCase.cancelDownLoad(url: lesson.videoURL)
     }
-    
     
     func observeOnDownloadProgress() {
         downloadLessonVideoUseCase.getDownloadProgress().sink { _ in
@@ -75,9 +78,11 @@ extension DefaultLessonDetailsViewModel {
     
     func viewDidLoad() {
         isVideoDownloadedBefore.send(isVideoExist(videoURL: lesson.videoURL))
+        downloadLessonVideoUseCase.checkVideoStatus(videoURl: lesson.videoURL)
     }
     
 }
+
 
 //MARK: - Private functions -
 
@@ -85,7 +90,7 @@ extension DefaultLessonDetailsViewModel {
     
     private func isVideoExist(videoURL: String) -> Bool {
         guard let url = URL(string: videoURL) else { return false }
-        guard let destinationURL = downloadLessonVideoUseCase.localFilePath(for: url) else { return false}
+        guard let destinationURL = downloadLessonVideoUseCase.localFilePath(for: url) else { return false }
         let isVideoExist = downloadLessonVideoUseCase.isVideoExist(destinationPath: destinationURL.path)
         self.lessonVideoLocalURL = isVideoExist ? destinationURL : nil
         return isVideoExist

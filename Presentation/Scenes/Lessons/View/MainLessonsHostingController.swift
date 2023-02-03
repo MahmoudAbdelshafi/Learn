@@ -32,8 +32,9 @@ struct MainView<T : MainLessonsViewModel> : View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.lessonsData) { lesson in
-                    NavigationLink(destination: LessonDetailsViewControllerWrapper(lesson: lesson)) {
+                ForEach(Array(viewModel.lessonsData.enumerated()), id: \.offset) { index, lesson in
+                    NavigationLink(destination: LessonDetailsViewControllerWrapper(lesson: lesson,
+                                                                                   nextLessons: filterNextLessonsArray(index: index))) {
                         LessonCellView(imageURL: lesson.thumbnail,
                                        title: lesson.name)
                     }
@@ -47,4 +48,11 @@ struct MainView<T : MainLessonsViewModel> : View {
         }
     }
     
+    private func filterNextLessonsArray(index: Int) -> [Lesson] {
+        var arrayFiltered = viewModel.lessonsData
+        arrayFiltered.remove(atOffsets: IndexSet(0...index))
+        return arrayFiltered
+    }
+    
 }
+

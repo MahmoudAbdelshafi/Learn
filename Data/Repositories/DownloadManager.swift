@@ -14,9 +14,7 @@ final class DownloadManager: NSObject {
                                              delegate: self,
                                              delegateQueue: nil)
     
-//    var downloadTask: URLSessionDownloadTask?
     var downloadingVideos: [ URL : DownloadVideoModel ] = [:]
-    var downloadStreamProgress = PassthroughSubject<DownloadProgressData, Never>()
     let pass = PassthroughSubject<[Lesson], Never>()
     
     static let shared = DownloadManager()
@@ -26,11 +24,17 @@ final class DownloadManager: NSObject {
     func localFilePath(for url: URL) -> URL? {
         getLocalFilePath(for: url)
     }
+    
 }
+
+//MARK: - URLSessionDownloadDelegate -
 
 extension DownloadManager: URLSessionDownloadDelegate {
     
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+    func urlSession(_ session: URLSession,
+                    downloadTask: URLSessionDownloadTask,
+                    didResumeAtOffset fileOffset: Int64,
+                    expectedTotalBytes: Int64) {
         debugPrint("Task has been resumed")
     }
     
@@ -38,10 +42,10 @@ extension DownloadManager: URLSessionDownloadDelegate {
                     downloadTask: URLSessionDownloadTask,
                     didFinishDownloadingTo location: URL) {
         debugPrint("Downloaded")
-        downloadStreamProgress.send(completion: .finished)
         guard let sourceUrl = downloadTask.originalRequest?.url else {
             return
         }
+        
         guard let destinationURL = localFilePath(for: sourceUrl) else { return }
         debugPrint(destinationURL)
         do {
@@ -56,6 +60,9 @@ extension DownloadManager: URLSessionDownloadDelegate {
         } catch {
             debugPrint ("file error: \(error)")
         }
+        guard let url = downloadTask.response?.url else { return }
+       removeDownloadFromCache(url: url)
+      
     }
     
     func urlSession(_ session: URLSession,
@@ -69,16 +76,13 @@ extension DownloadManager: URLSessionDownloadDelegate {
                                             bytesWritten: bytesWritten,
                                             totalBytesWritten: totalBytesWritten,
                                             totalBytesExpectedToWrite: totalBytesExpectedToWrite)
-//        if downloadTask == self.downloadTask {
-            DispatchQueue.main.async { [weak self] in
-                self?.downloadStreamProgress.send(download)
-                guard let url = downloadTask.response?.url else { return }
-                self?.downloadingVideos[url]?.progressStreem.send(download)
-//            }
+        DispatchQueue.main.async { [weak self] in
+            guard let url = downloadTask.response?.url else { return }
+            self?.downloadingVideos[url]?.progressStreem.send(download)
         }
     }
     
-     func download(with url: String) {
+    func download(with url: String) {
         guard let url = URL(string: url) else { return }
         let destinationURL = localFilePath(for: url)
         if isFileExist(destinationPath: destinationURL!.path) {
@@ -93,15 +97,31 @@ extension DownloadManager: URLSessionDownloadDelegate {
         }
     }
     
+    func cancel(url: String) {
+        guard let url = URL(string: url) else { return }
+        downloadingVideos[url]?.sessionTask?.cancel()
+        removeDownloadFromCache(url: url)
+    }
+    
     func isFileExist(destinationPath: String) -> Bool {
         return FileManager.default.fileExists(atPath: destinationPath)
     }
     
-     func getLocalFilePath(for url: URL) -> URL? {
-        guard let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+    func getLocalFilePath(for url: URL) -> URL? {
+        guard let documentsPath = FileManager.default.urls(for: .documentDirectory,
+                                                           in: .userDomainMask).first else { return nil }
         return documentsPath.appendingPathComponent(url.lastPathComponent)
     }
     
+    func isVideoDownloading(videoURL: String) -> Bool {
+        guard let url = URL(string: videoURL) else { return false }
+        return downloadingVideos[url] != nil
+    }
+    
+    private func removeDownloadFromCache(url: URL) {
+        self.downloadingVideos[url]?.progressStreem.send(completion: .finished)
+        self.downloadingVideos.removeValue(forKey: url)
+    }
 }
 
 struct DownloadVideoModel {
