@@ -38,33 +38,22 @@ extension DefaultLessonsRepository: LessonsRepository {
     }
     
     func getAllLessons() -> AnyPublisher<[Lesson], ProviderError> {
-        
-        let pass = PassthroughSubject<[Lesson], ProviderError>()
-        
-        self.cache?.getCached().sink(receiveCompletion: { _ in
-        }, receiveValue: { lessonsDTO in
-            pass.send(lessonsDTO.toLessonDomain())
-            if lessonsDTO.lessons?.count ?? 0 <= 0 {
-                self.provider.request(
-                    with: LessonsTarget.getAllLessons,
-                    scheduler: DispatchQueue.main,
-                    class: LessonsDTO.self
-                ).sink(receiveCompletion: { completion in
-                    switch completion {
-                    case .finished:
-                        pass.send(completion: .finished)
-                    case .failure(let failure):
-                        pass.send(completion: .failure(failure))
-                    }
-                }, receiveValue: { [weak self] lessonDTO in
-                    self?.cache?.cacheLessonsResponse(response: lessonDTO)
-                    pass.send(lessonDTO.toLessonDomain())
+        guard let cache = cache else { return loadServerLessons().eraseToAnyPublisher() }
+        return cache.getCachedLessons()
+            .map { $0.toLessonDomain() }
+            .flatMap({ (response: [Lesson]?) -> AnyPublisher<[ Lesson ], ProviderError>  in
+                
+                if let response = response, response.count > 0 {
+                    debugPrint("get from cache")
+                    return Just( response.map{ $0 } )
+                        .setFailureType(to: ProviderError.self)
+                        .eraseToAnyPublisher()
                     
-                }).store(in: &self.cancellableBag)
-            }
-        }).store(in: &cancellableBag)
-        
-        return pass.eraseToAnyPublisher()
+                } else {
+                    debugPrint("get from server")
+                    return self.loadServerLessons().eraseToAnyPublisher()
+                }
+            }).eraseToAnyPublisher()
     }
     
     func downloadLessonVideo(videoURL: String) {
@@ -93,18 +82,14 @@ extension DefaultLessonsRepository: LessonsRepository {
         }).store(in: &cancellableBag)
     }
     
-    private func getCachedLessons() {
-        let pass = PassthroughSubject<LessonsDTO, CoreDataStorageError>()
-        self.cache?.getCached().sink(receiveCompletion: { completion in
-            switch completion {
-            case .finished:
-                pass.send(completion: .finished)
-            case .failure(let failure):
-                pass.send(completion: .failure(failure))
-            }
-        }, receiveValue: { lessonsDTO in
-            pass.send(lessonsDTO)
-        }).store(in: &cancellableBag)
+    private func loadServerLessons() -> AnyPublisher<[Lesson], ProviderError> {
+        return self.provider.request(
+            with: LessonsTarget.getAllLessons,
+            scheduler: DispatchQueue.main,
+            class: LessonsDTO.self
+        ).map { [weak self] lesson in
+            self?.cache?.cacheLessonsResponse(response: lesson)
+            return lesson.toLessonDomain()
+        }.eraseToAnyPublisher()
     }
-    
 }

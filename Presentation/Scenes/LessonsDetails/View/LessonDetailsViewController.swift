@@ -39,6 +39,28 @@ struct LessonDetailsViewControllerWrapper: UIViewControllerRepresentable {
 
 class LessonDetailsViewController: UIViewController {
     
+    //MARK: - View Life Cycle -
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        bind()
+        setupUI()
+        fillData()
+        viewModel.viewDidLoad()
+    }
+    
+    //MARK: - Init -
+    
+    init(viewModel: LessonDetailsViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - Private Properties -
     
     private var viewModel: LessonDetailsViewModel
@@ -116,27 +138,7 @@ class LessonDetailsViewController: UIViewController {
         return button
     }()
     
-    //MARK: - View Life Cycle -
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        bind()
-        setupUI()
-        fillData()
-        viewModel.viewDidLoad()
-    }
-    
-    //MARK: - Init -
-    
-    init(viewModel: LessonDetailsViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
 
 }
 
@@ -144,12 +146,57 @@ class LessonDetailsViewController: UIViewController {
 
 extension LessonDetailsViewController: AVPlayerViewControllerDelegate {
     
+    private func fillData() {
+        videoThumbnailImg.downloadImage(withUrl: viewModel.lesson.thumbnail)
+        titleLabel.text = viewModel.lesson.name
+        descriptionLabel.text = viewModel.lesson.description
+    }
+    
+    private func bind() {
+        //: - downLoadProgressData
+        viewModel.downLoadProgressData.sink { _ in
+        } receiveValue: { [weak self] progressData in
+            if progressData.downloadTask.state == .running {
+                self?.showDownloadProgressView()
+            }
+            let calculatedProgress = Float(progressData.totalBytesWritten) / Float(progressData.totalBytesExpectedToWrite)
+            self?.progressView.progress = calculatedProgress
+            if progressData.totalBytesWritten == progressData.totalBytesExpectedToWrite {
+                self?.rightBarButton.isHidden = true
+            }
+        }.store(in: &viewModel.cancellableBag)
+        
+        //: - isVideoDownloadedBefore
+        viewModel.isVideoDownloadedBefore.sink { bool in
+            if bool {
+                self.rightBarButton.isHidden = true
+            }
+        }.store(in: &viewModel.cancellableBag)
+    }
+    
+    private func playVideo() {
+        var url: URL?
+        guard let videoURL = URL(string: viewModel.lesson.videoURL) else { return }
+        url = videoURL
+        if viewModel.lessonVideoLocalURL != nil {
+            url = viewModel.lessonVideoLocalURL
+        }
+        player = AVPlayer(url: url!)
+        let playervc = AVPlayerViewController()
+        playervc.delegate = self
+        playervc.player = player
+        self.present(playervc, animated: true) {
+            playervc.player!.play()
+        }
+    }
+    
+    
     @objc private func playButtonPressed(_ sender: Any) {
         playVideo()
     }
     
     @objc private func downloadButtonPressed(_ sender: Any) {
-        viewModel.dowloadVideo(videoURL: viewModel.lesson.videoURL)
+        viewModel.downloadVideo(videoURL: viewModel.lesson.videoURL)
         showDownloadProgressView()
     }
     
@@ -193,34 +240,35 @@ extension LessonDetailsViewController: AVPlayerViewControllerDelegate {
     }
     
     private func setupConstraints() {
+        //: - videoThumbnailImg
         videoThumbnailImg.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 0).isActive = true
         videoThumbnailImg.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0).isActive = true
         videoThumbnailImg.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0).isActive = true
         videoThumbnailImg.heightAnchor.constraint(equalToConstant: 350).isActive = true
         videoThumbnailImg.translatesAutoresizingMaskIntoConstraints = false
-        
+        //: - videoButton
         videoButton.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 0).isActive = true
         videoButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0).isActive = true
         videoButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0).isActive = true
         videoButton.heightAnchor.constraint(equalTo: videoThumbnailImg.heightAnchor).isActive = true
         videoButton.translatesAutoresizingMaskIntoConstraints = false
-        
+        //: - playerIconImage
         playerIconImage.centerXAnchor.constraint(equalTo: self.videoButton.centerXAnchor, constant: 0).isActive = true
         playerIconImage.centerYAnchor.constraint(equalTo: self.videoButton.centerYAnchor, constant: 0).isActive = true
         playerIconImage.heightAnchor.constraint(equalToConstant: 70).isActive = true
         playerIconImage.widthAnchor.constraint(equalToConstant: 60).isActive = true
         playerIconImage.translatesAutoresizingMaskIntoConstraints = false
-        
+        //: - titleLabel
         titleLabel.topAnchor.constraint(equalTo: self.videoButton.bottomAnchor, constant: 16).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16).isActive = true
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+        //: - descriptionLabel
         descriptionLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 16).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16).isActive = true
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+        //: - nextLessonButton
         nextLessonButton.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor, constant: 24).isActive = true
         nextLessonButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16).isActive = true
         nextLessonButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 24).isActive = true
@@ -265,50 +313,6 @@ extension LessonDetailsViewController: AVPlayerViewControllerDelegate {
         
         rightBarButton = UIBarButtonItem(customView: navigationRightItemStackView)
         self.navigationItem.rightBarButtonItem = rightBarButton
-    }
-    
-    private func playVideo() {
-        var url: URL?
-        guard let videoURL = URL(string: viewModel.lesson.videoURL) else { return }
-        url = videoURL
-        if viewModel.lessonVideoLocalURL != nil {
-            url = viewModel.lessonVideoLocalURL
-        }
-        player = AVPlayer(url: url!)
-        let playervc = AVPlayerViewController()
-        playervc.delegate = self
-        playervc.player = player
-        self.present(playervc, animated: true) {
-            playervc.player!.play()
-        }
-    }
-    
-    private func fillData() {
-        videoThumbnailImg.downloadImage(withUrl: viewModel.lesson.thumbnail)
-        titleLabel.text = viewModel.lesson.name
-        descriptionLabel.text = viewModel.lesson.description
-    }
-    
-    private func bind() {
-        //: - downLoadProgressData
-        viewModel.downLoadProgressData.sink { _ in
-        } receiveValue: { [weak self] progressData in
-            if progressData.downloadTask.state == .running {
-                self?.showDownloadProgressView()
-            }
-            let calculatedProgress = Float(progressData.totalBytesWritten) / Float(progressData.totalBytesExpectedToWrite)
-            self?.progressView.progress = calculatedProgress
-            if progressData.totalBytesWritten == progressData.totalBytesExpectedToWrite {
-                self?.rightBarButton.isHidden = true
-            }
-        }.store(in: &viewModel.cancellableBag)
-        
-        //: - isVideoDownloadedBefore
-        viewModel.isVideoDownloadedBefore.sink { bool in
-            if bool {
-                self.rightBarButton.isHidden = true
-            }
-        }.store(in: &viewModel.cancellableBag)
     }
     
     private func navigateToNextLesson() {

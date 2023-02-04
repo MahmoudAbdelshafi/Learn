@@ -13,7 +13,7 @@ protocol LessonDetailsViewModelOutput {
 }
 
 protocol LessonDetailsViewModelInput {
-    func dowloadVideo(videoURL: String)
+    func downloadVideo(videoURL: String)
     func viewDidLoad()
     func cancelDownLoad()
     var lesson: Lesson { get }
@@ -21,7 +21,7 @@ protocol LessonDetailsViewModelInput {
     var lessonVideoLocalURL: URL? { get }
     var downLoadProgressData: PassthroughSubject<DownloadProgressData,Never> { get }
     var cancellableBag: Set<AnyCancellable> { get set }
-    var isVideoDownloadedBefore: PassthroughSubject<Bool,Never>  {get }
+    var isVideoDownloadedBefore: PassthroughSubject<Bool,Never>  { get }
 }
 
 protocol LessonDetailsViewModel: LessonDetailsViewModelOutput, LessonDetailsViewModelInput { }
@@ -59,9 +59,9 @@ final class DefaultLessonDetailsViewModel: LessonDetailsViewModel {
 
 extension DefaultLessonDetailsViewModel {
     
-    func dowloadVideo(videoURL: String) {
+    func downloadVideo(videoURL: String) {
         if !isVideoExist(videoURL: videoURL) {
-            downloadLessonVideoUseCase.execute(videoURL: videoURL)
+            downloadLessonVideoUseCase.downloadVideo(videoURL: videoURL)
         }
     }
     

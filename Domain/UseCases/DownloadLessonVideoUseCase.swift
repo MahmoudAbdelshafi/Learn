@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol DownloadLessonVideoUseCase {
-    func execute(videoURL: String)
+    func downloadVideo(videoURL: String)
     func isVideoExist(destinationPath: String) -> Bool
     func localFilePath(for url: URL) -> URL?
     func getDownloadProgress() -> AnyPublisher<DownloadProgressData, Never>
@@ -33,7 +33,7 @@ final class DefaultDownloadLessonVideoUseCase: DownloadLessonVideoUseCase {
     
     //MARK: - Methods
     
-    func execute(videoURL: String) {
+    func downloadVideo(videoURL: String) {
         lessonsRepository.downloadLessonVideo(videoURL: videoURL)
     }
     

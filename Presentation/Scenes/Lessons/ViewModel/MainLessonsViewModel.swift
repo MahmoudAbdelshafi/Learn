@@ -59,10 +59,3 @@ extension DefaultMainLessonsViewModel {
         loadAllLessons()
     }
 }
-
-//MARK: - Outputs -
-
-extension DefaultMainLessonsViewModel {
-    
-    
-}

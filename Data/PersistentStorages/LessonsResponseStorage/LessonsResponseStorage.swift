@@ -9,6 +9,6 @@ import Foundation
 import Combine
 
 protocol LessonsResponseStorage {
-    func getCached() -> AnyPublisher<LessonsDTO, CoreDataStorageError>
+    func getCachedLessons() -> AnyPublisher<LessonsDTO, ProviderError>
     func cacheLessonsResponse(response: LessonsDTO) 
 }
