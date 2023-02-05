@@ -23,15 +23,12 @@ final class CoreDataLessonsResponseStorage {
 extension CoreDataLessonsResponseStorage: LessonsResponseStorage {
     
     func getCachedLessons() -> AnyPublisher<LessonsDTO, ProviderError> {
-        debugPrint("get from coredata")
         let pass = PassthroughSubject<LessonsDTO,ProviderError>()
         coreDataStorage.performBackgroundTask { context in
             let fetchRequest = CoreDataLesson.fetchRequest()
             do {
                 let requestEntity =  try context.fetch(fetchRequest)
-                debugPrint("requestEntity coredata")
                 let coreDataDTO = CoreDataLesson.toLessonsDTO(requestEntity)
-                debugPrint("coreDataDTO coredata\(coreDataDTO)")
                 pass.send(coreDataDTO)
             } catch {
                 pass.send(completion: .failure(ProviderError.decodingError(error)))
@@ -39,7 +36,6 @@ extension CoreDataLessonsResponseStorage: LessonsResponseStorage {
         }
         return pass.eraseToAnyPublisher()
     }
-    
     
     func cacheLessonsResponse(response: LessonsDTO) {
         coreDataStorage.performBackgroundTask { [weak self] context in

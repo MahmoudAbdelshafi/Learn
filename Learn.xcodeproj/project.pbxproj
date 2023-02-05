@@ -7,17 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E5539F07298D15B9002271C2 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F06298D15B9002271C2 /* DownloadManager.swift */; };
+		E5539F07298D15B9002271C2 /* VideosDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F06298D15B9002271C2 /* VideosDownloadManager.swift */; };
 		E5539F0E298D7FF9002271C2 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E5539F0C298D7FF9002271C2 /* CoreDataStorage.xcdatamodeld */; };
 		E5539F10298D8117002271C2 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F0F298D8117002271C2 /* CoreDataStorage.swift */; };
 		E5539F13298D8244002271C2 /* CoreDataLesson+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F11298D8244002271C2 /* CoreDataLesson+CoreDataClass.swift */; };
 		E5539F14298D8244002271C2 /* CoreDataLesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F12298D8244002271C2 /* CoreDataLesson+CoreDataProperties.swift */; };
 		E5539F16298D8421002271C2 /* LessonsResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F15298D8421002271C2 /* LessonsResponseStorage.swift */; };
 		E5539F18298D84D7002271C2 /* CoreDataLessonsResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F17298D84D7002271C2 /* CoreDataLessonsResponseStorage.swift */; };
+		E56C5092298EC45600C6352A /* BaseRepoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C5090298EC3F100C6352A /* BaseRepoMock.swift */; };
+		E56C5099298ED08900C6352A /* MainLessonsViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C5098298ED08900C6352A /* MainLessonsViewModelMock.swift */; };
+		E56C509E298ED2AD00C6352A /* FetchLessonsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C509D298ED2AD00C6352A /* FetchLessonsUseCaseTests.swift */; };
+		E56E383B298F0D02002F91F2 /* PublisherExpectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E3839298F0D02002F91F2 /* PublisherExpectation.swift */; };
+		E56E383C298F0D02002F91F2 /* AutomaticallyEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E383A298F0D02002F91F2 /* AutomaticallyEquatable.swift */; };
 		E57B46E8298A808300E5DA64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57B46E6298A808300E5DA64 /* Main.storyboard */; };
 		E57B46ED298A808400E5DA64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57B46EC298A808400E5DA64 /* Assets.xcassets */; };
 		E57B46F0298A808400E5DA64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57B46EE298A808400E5DA64 /* LaunchScreen.storyboard */; };
-		E57B46FB298A808400E5DA64 /* LearnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B46FA298A808400E5DA64 /* LearnTests.swift */; };
 		E57B4705298A808400E5DA64 /* LearnUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B4704298A808400E5DA64 /* LearnUITests.swift */; };
 		E57B4707298A808400E5DA64 /* LearnUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B4706298A808400E5DA64 /* LearnUITestsLaunchTests.swift */; };
 		E57B4718298A80CC00E5DA64 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B4714298A80CC00E5DA64 /* AppFlowCoordinator.swift */; };
@@ -78,20 +82,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E5539F06298D15B9002271C2 /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		E5539F06298D15B9002271C2 /* VideosDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosDownloadManager.swift; sourceTree = "<group>"; };
 		E5539F0D298D7FF9002271C2 /* CoreDataStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataStorage.xcdatamodel; sourceTree = "<group>"; };
 		E5539F0F298D8117002271C2 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		E5539F11298D8244002271C2 /* CoreDataLesson+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataLesson+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E5539F12298D8244002271C2 /* CoreDataLesson+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataLesson+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E5539F15298D8421002271C2 /* LessonsResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsResponseStorage.swift; sourceTree = "<group>"; };
 		E5539F17298D84D7002271C2 /* CoreDataLessonsResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataLessonsResponseStorage.swift; sourceTree = "<group>"; };
+		E56C5090298EC3F100C6352A /* BaseRepoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepoMock.swift; sourceTree = "<group>"; };
+		E56C5098298ED08900C6352A /* MainLessonsViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLessonsViewModelMock.swift; sourceTree = "<group>"; };
+		E56C509D298ED2AD00C6352A /* FetchLessonsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchLessonsUseCaseTests.swift; sourceTree = "<group>"; };
+		E56E3839298F0D02002F91F2 /* PublisherExpectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublisherExpectation.swift; sourceTree = "<group>"; };
+		E56E383A298F0D02002F91F2 /* AutomaticallyEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutomaticallyEquatable.swift; sourceTree = "<group>"; };
 		E57B46DD298A808300E5DA64 /* Learn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Learn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57B46E7298A808300E5DA64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E57B46EC298A808400E5DA64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E57B46EF298A808400E5DA64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E57B46F1298A808400E5DA64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E57B46F6298A808400E5DA64 /* LearnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LearnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E57B46FA298A808400E5DA64 /* LearnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnTests.swift; sourceTree = "<group>"; };
 		E57B4700298A808400E5DA64 /* LearnUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LearnUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57B4704298A808400E5DA64 /* LearnUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnUITests.swift; sourceTree = "<group>"; };
 		E57B4706298A808400E5DA64 /* LearnUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -197,6 +205,46 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		E56C508C298EC36300C6352A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E56C508F298EC3E100C6352A /* RepoMock */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E56C508E298EC36F00C6352A /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E56C5095298ECE7E00C6352A /* LessonsScreenTests */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		E56C508F298EC3E100C6352A /* RepoMock */ = {
+			isa = PBXGroup;
+			children = (
+				E56C5090298EC3F100C6352A /* BaseRepoMock.swift */,
+			);
+			path = RepoMock;
+			sourceTree = "<group>";
+		};
+		E56C5095298ECE7E00C6352A /* LessonsScreenTests */ = {
+			isa = PBXGroup;
+			children = (
+				E56C5098298ED08900C6352A /* MainLessonsViewModelMock.swift */,
+			);
+			path = LessonsScreenTests;
+			sourceTree = "<group>";
+		};
+		E56C509A298ED26F00C6352A /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E56C509D298ED2AD00C6352A /* FetchLessonsUseCaseTests.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
 		E57B46D4298A808300E5DA64 = {
 			isa = PBXGroup;
 			children = (
@@ -239,7 +287,11 @@
 		E57B46F9298A808400E5DA64 /* LearnTests */ = {
 			isa = PBXGroup;
 			children = (
-				E57B46FA298A808400E5DA64 /* LearnTests.swift */,
+				E56E383A298F0D02002F91F2 /* AutomaticallyEquatable.swift */,
+				E56E3839298F0D02002F91F2 /* PublisherExpectation.swift */,
+				E56C509A298ED26F00C6352A /* Domain */,
+				E56C508E298EC36F00C6352A /* Presentation */,
+				E56C508C298EC36300C6352A /* Data */,
 			);
 			path = LearnTests;
 			sourceTree = "<group>";
@@ -349,7 +401,6 @@
 			isa = PBXGroup;
 			children = (
 				E57C9A37298A8E8600CBBA7E /* DefaultLessonsRepository.swift */,
-				E5539F06298D15B9002271C2 /* DownloadManager.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -357,6 +408,7 @@
 		E57B4749298A81D000E5DA64 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				E5539F06298D15B9002271C2 /* VideosDownloadManager.swift */,
 				E57C9A33298A8C2000CBBA7E /* NetworkTarget+AppConfigs.swift */,
 				E57C9A35298A8C4D00CBBA7E /* LessonsTarget.swift */,
 				E57C9A3B298A8F5600CBBA7E /* DataMapping */,
@@ -635,7 +687,7 @@
 				E57B473A298A818C00E5DA64 /* HoverProtocol.swift in Sources */,
 				E57C9A53298AA5FF00CBBA7E /* LessonDetailsViewController.swift in Sources */,
 				E57B472C298A817D00E5DA64 /* MethodType.swift in Sources */,
-				E5539F07298D15B9002271C2 /* DownloadManager.swift in Sources */,
+				E5539F07298D15B9002271C2 /* VideosDownloadManager.swift in Sources */,
 				E5539F13298D8244002271C2 /* CoreDataLesson+CoreDataClass.swift in Sources */,
 				E5539F10298D8117002271C2 /* CoreDataStorage.swift in Sources */,
 				E57B472E298A817D00E5DA64 /* AuthProviderType.swift in Sources */,
@@ -676,7 +728,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E57B46FB298A808400E5DA64 /* LearnTests.swift in Sources */,
+				E56C5092298EC45600C6352A /* BaseRepoMock.swift in Sources */,
+				E56C509E298ED2AD00C6352A /* FetchLessonsUseCaseTests.swift in Sources */,
+				E56E383C298F0D02002F91F2 /* AutomaticallyEquatable.swift in Sources */,
+				E56E383B298F0D02002F91F2 /* PublisherExpectation.swift in Sources */,
+				E56C5099298ED08900C6352A /* MainLessonsViewModelMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

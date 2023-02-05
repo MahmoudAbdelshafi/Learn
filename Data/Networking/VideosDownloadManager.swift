@@ -1,5 +1,5 @@
 //
-//  DownloadManager.swift
+//  VideosDownloadManager.swift
 //  Learn
 //
 //  Created by Mahmoud Abdelshafi on 03/02/2023.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class DownloadManager: NSObject {
+final class VideosDownloadManager: NSObject {
     
     private lazy var urlSession = URLSession(configuration: .default,
                                              delegate: self,
@@ -17,7 +17,7 @@ final class DownloadManager: NSObject {
     var downloadingVideos: [ URL : DownloadVideoModel ] = [:]
     let pass = PassthroughSubject<[Lesson], Never>()
     
-    static let shared = DownloadManager()
+    static let shared = VideosDownloadManager()
     
     private override init() {}
     
@@ -29,7 +29,7 @@ final class DownloadManager: NSObject {
 
 //MARK: - URLSessionDownloadDelegate -
 
-extension DownloadManager: URLSessionDownloadDelegate {
+extension VideosDownloadManager: URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession,
                     downloadTask: URLSessionDownloadTask,

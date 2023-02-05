@@ -23,7 +23,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Learn Photography" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGq-kc-EW3">
-                                <rect key="frame" x="20" y="502.66666666666674" width="353" height="29"/>
+                                <rect key="frame" x="90.000000000000014" y="502.66666666666674" width="213.33333333333337" height="29"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -33,9 +33,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="AGq-kc-EW3" firstAttribute="centerX" secondItem="7wO-Pg-jNF" secondAttribute="centerX" id="5PD-6f-vv5"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AGq-kc-EW3" secondAttribute="trailing" constant="20" id="7s1-z1-x6i"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AGq-kc-EW3" secondAttribute="trailing" constant="20" id="7s1-z1-x6i"/>
                             <constraint firstItem="7wO-Pg-jNF" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="MGC-BP-e5h"/>
-                            <constraint firstItem="AGq-kc-EW3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="V2Z-o8-fTs"/>
+                            <constraint firstItem="AGq-kc-EW3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="V2Z-o8-fTs"/>
                             <constraint firstItem="7wO-Pg-jNF" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="oTA-6x-94h"/>
                             <constraint firstItem="AGq-kc-EW3" firstAttribute="top" secondItem="7wO-Pg-jNF" secondAttribute="bottom" constant="5" id="vth-Ey-eNI"/>
                         </constraints>

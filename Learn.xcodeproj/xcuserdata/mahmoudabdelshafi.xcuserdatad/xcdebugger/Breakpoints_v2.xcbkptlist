@@ -3,4 +3,54 @@
    uuid = "98754C90-7C7C-4F31-9050-63C269C6781E"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EF4D1ABE-7ED3-4353-BF83-DEC5D459C3B9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LearnTests/Domain/FetchLessonsUseCaseTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "testFetchLessonsUseCase_whenSuccessfullyFetchesLessons()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EF4D1ABE-7ED3-4353-BF83-DEC5D459C3B9 - a079e677634d2399"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Combine.Subscribers.Completion&lt;Learn.ProviderError&gt;) -&gt; () in LearnTests.FetchLessonsUseCaseTests.testFetchLessonsUseCase_whenSuccessfullyFetchesLessons() throws -&gt; ()"
+                  moduleName = "LearnTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mahmoudabdelshafi/Desktop/SideProjects/Learn/LearnTests/Domain/FetchLessonsUseCaseTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "29">
+               </Location>
+               <Location
+                  uuid = "EF4D1ABE-7ED3-4353-BF83-DEC5D459C3B9 - 2583b3dfcfbd9779"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Array&lt;Learn.Lesson&gt;) -&gt; () in LearnTests.FetchLessonsUseCaseTests.testFetchLessonsUseCase_whenSuccessfullyFetchesLessons() throws -&gt; ()"
+                  moduleName = "LearnTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mahmoudabdelshafi/Desktop/SideProjects/Learn/LearnTests/Domain/FetchLessonsUseCaseTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "94">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

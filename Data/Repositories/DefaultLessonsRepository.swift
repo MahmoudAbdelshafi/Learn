@@ -11,7 +11,7 @@ import Combine
 final class DefaultLessonsRepository: NSObject {
     
     private let provider: Hover
-    private let downloadManager: DownloadManager
+    private let downloadManager: VideosDownloadManager
     fileprivate let cache: LessonsResponseStorage?
     fileprivate var cancellableBag = Set<AnyCancellable>()
     
@@ -20,10 +20,10 @@ final class DefaultLessonsRepository: NSObject {
     let pass = PassthroughSubject<[Lesson], Never>()
     
     init(provider: Hover,
-         downloadManager: DownloadManager? = nil,
+         downloadManager: VideosDownloadManager? = nil,
          cache: LessonsResponseStorage? = nil) {
         self.provider = provider
-        self.downloadManager = downloadManager ?? DownloadManager.shared
+        self.downloadManager = downloadManager ?? VideosDownloadManager.shared
         self.cache = cache
     }
     

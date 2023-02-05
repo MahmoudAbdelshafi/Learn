@@ -11,6 +11,7 @@ import SwiftUI
 
 protocol MainLessonsViewModelModelOutput {
     var lessonsData: [Lesson] { get }
+    func filterNextLessonsArray(index: Int) -> [Lesson]
 }
 
 protocol MainLessonsViewModelViewModelInput {
@@ -20,7 +21,7 @@ protocol MainLessonsViewModelViewModelInput {
 protocol MainLessonsViewModel: ObservableObject, MainLessonsViewModelViewModelInput, MainLessonsViewModelModelOutput { }
 
 final class DefaultMainLessonsViewModel: MainLessonsViewModel {
- 
+    
     
     //MARK: - Output Properties -
     
@@ -41,6 +42,7 @@ final class DefaultMainLessonsViewModel: MainLessonsViewModel {
     
     private func loadAllLessons() {
         fetchLessonsUseCase.execute()
+            .receive(on: DispatchQueue.main)
             .sink { error in
                 debugPrint(error)
             } receiveValue: { [weak self] lessons in
@@ -57,5 +59,11 @@ extension DefaultMainLessonsViewModel {
     
     func viewAppeared() {
         loadAllLessons()
+    }
+    
+    func filterNextLessonsArray(index: Int) -> [Lesson] {
+        var arrayFiltered = lessonsData
+        arrayFiltered.remove(atOffsets: IndexSet(0...index))
+        return arrayFiltered
     }
 }

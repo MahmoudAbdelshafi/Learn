@@ -16,7 +16,7 @@ protocol LessonsScenesFlowCoordinatorDependencies {
 final class LessonsScenesCoordinator {
     
     private weak var navigationController: UINavigationController?
-     let dependencies: LessonsScenesFlowCoordinatorDependencies
+    private let dependencies: LessonsScenesFlowCoordinatorDependencies
     
     private weak var mainLessonsVC: MainLessonsHostingController?
     

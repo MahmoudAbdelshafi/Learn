@@ -35,13 +35,6 @@ struct LessonCellView: View {
                 .foregroundColor(colorScheme == .light ? Color.black : Color.white)
                 .multilineTextAlignment(.leading)
                 .padding(.leading)
-
-//            Spacer()
-//            
-//            // - Right Arrow Image
-//            Image(systemName: "chevron.right")
-//                .foregroundColor(Color.blue)
-//                .padding([.trailing], 16)
         }
     }
 }
