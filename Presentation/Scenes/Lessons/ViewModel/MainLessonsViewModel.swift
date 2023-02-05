@@ -12,6 +12,7 @@ import SwiftUI
 protocol MainLessonsViewModelModelOutput {
     var lessonsData: [Lesson] { get }
     func filterNextLessonsArray(index: Int) -> [Lesson]
+    var error: Swift.Error? { get set }
 }
 
 protocol MainLessonsViewModelViewModelInput {
@@ -20,7 +21,7 @@ protocol MainLessonsViewModelViewModelInput {
 
 protocol MainLessonsViewModel: ObservableObject, MainLessonsViewModelViewModelInput, MainLessonsViewModelModelOutput { }
 
-final class DefaultMainLessonsViewModel: MainLessonsViewModel {
+final class DefaultMainLessonsViewModel: ObservableObject, MainLessonsViewModel {
     
     
     //MARK: - Output Properties -
@@ -31,6 +32,7 @@ final class DefaultMainLessonsViewModel: MainLessonsViewModel {
     
     private let fetchLessonsUseCase: FetchLessonsUseCase
     fileprivate var cancellableBag = Set<AnyCancellable>()
+    @Published var error: Swift.Error?
     
     //MARK: - Init -
     
@@ -43,8 +45,13 @@ final class DefaultMainLessonsViewModel: MainLessonsViewModel {
     private func loadAllLessons() {
         fetchLessonsUseCase.execute()
             .receive(on: DispatchQueue.main)
-            .sink { error in
-                debugPrint(error)
+            .sink {  [weak self] completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    self?.error = error
+                }
             } receiveValue: { [weak self] lessons in
                 self?.lessonsData.removeAll()
                 self?.lessonsData = lessons

@@ -33,12 +33,13 @@ struct MainView<T : MainLessonsViewModel> : View {
         NavigationView {
             List {
                 ForEach(Array(viewModel.lessonsData.enumerated()), id: \.offset) { index, lesson in
-                    NavigationLink(destination: LessonDetailsViewControllerWrapper(lesson: lesson,
-                                                                                   nextLessons: viewModel.filterNextLessonsArray(index: index))) {
-                        LessonCellView(imageURL: lesson.thumbnail,
-                                       title: lesson.name)
-                    }.accessibilityIdentifier("cell_\(lesson.id)") /// USED for UITesing purposes
-                    .foregroundColor(Color.blue)
+                    NavigationLink(destination: LessonDetailsViewControllerWrapper(
+                        lesson: lesson,
+                        nextLessons: viewModel.filterNextLessonsArray(index: index))) {
+                            LessonCellView(imageURL: lesson.thumbnail,
+                                           title: lesson.name)
+                        }.accessibilityIdentifier("cell_\(lesson.id)") /// USED for UITesing purposes
+                        .foregroundColor(Color.blue)
                 }
             }
             .accessibilityIdentifier("LessonsList") /// USED for UITesing purposes
@@ -48,6 +49,4 @@ struct MainView<T : MainLessonsViewModel> : View {
             viewModel.viewAppeared()
         }
     }
-    
 }
-

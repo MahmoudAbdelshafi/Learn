@@ -17,8 +17,6 @@
 		E56C5092298EC45600C6352A /* BaseRepoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C5090298EC3F100C6352A /* BaseRepoMock.swift */; };
 		E56C5099298ED08900C6352A /* MainLessonsViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C5098298ED08900C6352A /* MainLessonsViewModelMock.swift */; };
 		E56C509E298ED2AD00C6352A /* FetchLessonsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C509D298ED2AD00C6352A /* FetchLessonsUseCaseTests.swift */; };
-		E56E383B298F0D02002F91F2 /* PublisherExpectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E3839298F0D02002F91F2 /* PublisherExpectation.swift */; };
-		E56E383C298F0D02002F91F2 /* AutomaticallyEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E383A298F0D02002F91F2 /* AutomaticallyEquatable.swift */; };
 		E57B46E8298A808300E5DA64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57B46E6298A808300E5DA64 /* Main.storyboard */; };
 		E57B46ED298A808400E5DA64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57B46EC298A808400E5DA64 /* Assets.xcassets */; };
 		E57B46F0298A808400E5DA64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57B46EE298A808400E5DA64 /* LaunchScreen.storyboard */; };
@@ -92,8 +90,6 @@
 		E56C5090298EC3F100C6352A /* BaseRepoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepoMock.swift; sourceTree = "<group>"; };
 		E56C5098298ED08900C6352A /* MainLessonsViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLessonsViewModelMock.swift; sourceTree = "<group>"; };
 		E56C509D298ED2AD00C6352A /* FetchLessonsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchLessonsUseCaseTests.swift; sourceTree = "<group>"; };
-		E56E3839298F0D02002F91F2 /* PublisherExpectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublisherExpectation.swift; sourceTree = "<group>"; };
-		E56E383A298F0D02002F91F2 /* AutomaticallyEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutomaticallyEquatable.swift; sourceTree = "<group>"; };
 		E57B46DD298A808300E5DA64 /* Learn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Learn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57B46E7298A808300E5DA64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E57B46EC298A808400E5DA64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -295,8 +291,6 @@
 		E57B46F9298A808400E5DA64 /* LearnTests */ = {
 			isa = PBXGroup;
 			children = (
-				E56E383A298F0D02002F91F2 /* AutomaticallyEquatable.swift */,
-				E56E3839298F0D02002F91F2 /* PublisherExpectation.swift */,
 				E56C509A298ED26F00C6352A /* Domain */,
 				E56C508E298EC36F00C6352A /* Presentation */,
 				E56C508C298EC36300C6352A /* Data */,
@@ -738,8 +732,6 @@
 			files = (
 				E56C5092298EC45600C6352A /* BaseRepoMock.swift in Sources */,
 				E56C509E298ED2AD00C6352A /* FetchLessonsUseCaseTests.swift in Sources */,
-				E56E383C298F0D02002F91F2 /* AutomaticallyEquatable.swift in Sources */,
-				E56E383B298F0D02002F91F2 /* PublisherExpectation.swift in Sources */,
 				E56C5099298ED08900C6352A /* MainLessonsViewModelMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

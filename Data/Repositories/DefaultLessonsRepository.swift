@@ -87,9 +87,11 @@ extension DefaultLessonsRepository: LessonsRepository {
             with: LessonsTarget.getAllLessons,
             scheduler: DispatchQueue.main,
             class: LessonsDTO.self
-        ).map { [weak self] lesson in
-            self?.cache?.cacheLessonsResponse(response: lesson)
-            return lesson.toLessonDomain()
-        }.eraseToAnyPublisher()
+        )
+        .map {$0.toLessonDomain()}
+        .mapError{$0}
+        .eraseToAnyPublisher()
     }
+    
+    
 }
