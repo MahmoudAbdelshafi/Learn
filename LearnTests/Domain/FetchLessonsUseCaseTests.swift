@@ -18,8 +18,19 @@ final class FetchLessonsUseCaseTests: XCTestCase {
     }()
     
     private var cancellableBag: Set<AnyCancellable> = []
-    private let repoMock = DefaultLessonsRepositoryMock()
-    private var useCase: FetchLessonsUseCase?
+    private var repoMock: DefaultLessonsRepositoryMock!
+    private var useCase: FetchLessonsUseCase!
+    
+    
+    override func setUpWithError() throws {
+        repoMock = DefaultLessonsRepositoryMock()
+        useCase = DefaultFetchLessonsUseCase(lessonsRepository: repoMock)
+    }
+
+    override func tearDownWithError() throws {
+        repoMock = nil
+        useCase = nil
+    }
     
     func testFetchLessonsUseCase_whenFaildFetchesLessons() throws {
         // given
@@ -27,7 +38,6 @@ final class FetchLessonsUseCaseTests: XCTestCase {
         expectation.expectedFulfillmentCount = 2
         repoMock.lessons = nil
         repoMock.shouldSuccess = false
-        useCase = DefaultFetchLessonsUseCase(lessonsRepository: repoMock)
         
         // when
         useCase!.execute().sink { _ in
@@ -54,9 +64,9 @@ final class FetchLessonsUseCaseTests: XCTestCase {
         // given
         let expectation = self.expectation(description: "Fetch Lessons UseCase Successfully")
         expectation.expectedFulfillmentCount = 2
-        repoMock.shouldSuccess = true
         repoMock.lessons = FetchLessonsUseCaseTests.lessons
-        useCase = DefaultFetchLessonsUseCase(lessonsRepository: repoMock)
+        repoMock.shouldSuccess = true
+
         // when
         useCase!.execute().sink { _ in
             
@@ -64,8 +74,6 @@ final class FetchLessonsUseCaseTests: XCTestCase {
             expectation.fulfill()
         }.store(in: &cancellableBag)
         
-        
-        // then
         var lessons = [Lesson]()
         
         repoMock.getAllLessons().sink { _ in
@@ -76,16 +84,17 @@ final class FetchLessonsUseCaseTests: XCTestCase {
             expectation.fulfill()
         }.store(in: &cancellableBag)
         
+        // then
         wait(for: [expectation], timeout: 5)
         XCTAssertTrue(!lessons.isEmpty)
         XCTAssertTrue(lessons.contains(where: { $0.description == "Lesson two enjoy learning" }))
     }
     
-    
     class DefaultLessonsRepositoryMock: BaseRepoMock, LessonsRepository {
         var lessons : [Learn.Lesson]? = []
         var videoDestinationPath: String!
         var localFilePath: URL!
+        var videoURL: String?
         var error: ProviderError? = ProviderError.invalidServerResponse
         
         var downloadStreamProgress = PassthroughSubject<Learn.DownloadProgressData, Never>()
@@ -103,7 +112,7 @@ final class FetchLessonsUseCaseTests: XCTestCase {
         }
         
         func downloadLessonVideo(videoURL: String) {
-            
+            self.videoURL = videoURL
         }
         
         func isVideoExist(destinationPath: String) -> Bool {
@@ -115,11 +124,11 @@ final class FetchLessonsUseCaseTests: XCTestCase {
         }
         
         func cancelDownLoad(url: String) {
-            
+            videoURL = url
         }
         
         func checkVideoStatus(videoURl: String) {
-            
+            self.videoURL = videoURl
         }
         
         
