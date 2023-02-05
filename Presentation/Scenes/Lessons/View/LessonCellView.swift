@@ -29,6 +29,7 @@ struct LessonCellView: View {
             .frame(width: 70, height: 60)
             .background(Color.gray)
             
+            
             // - Lesson Title
             Text(title)
                 .font(.system(size: 14).weight(.medium))

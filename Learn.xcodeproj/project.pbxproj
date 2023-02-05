@@ -22,7 +22,7 @@
 		E57B46E8298A808300E5DA64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57B46E6298A808300E5DA64 /* Main.storyboard */; };
 		E57B46ED298A808400E5DA64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57B46EC298A808400E5DA64 /* Assets.xcassets */; };
 		E57B46F0298A808400E5DA64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57B46EE298A808400E5DA64 /* LaunchScreen.storyboard */; };
-		E57B4705298A808400E5DA64 /* LearnUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B4704298A808400E5DA64 /* LearnUITests.swift */; };
+		E57B4705298A808400E5DA64 /* MainViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B4704298A808400E5DA64 /* MainViewUITests.swift */; };
 		E57B4707298A808400E5DA64 /* LearnUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B4706298A808400E5DA64 /* LearnUITestsLaunchTests.swift */; };
 		E57B4718298A80CC00E5DA64 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B4714298A80CC00E5DA64 /* AppFlowCoordinator.swift */; };
 		E57B4719298A80CC00E5DA64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B4715298A80CC00E5DA64 /* AppDelegate.swift */; };
@@ -101,7 +101,7 @@
 		E57B46F1298A808400E5DA64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E57B46F6298A808400E5DA64 /* LearnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LearnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57B4700298A808400E5DA64 /* LearnUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LearnUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E57B4704298A808400E5DA64 /* LearnUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnUITests.swift; sourceTree = "<group>"; };
+		E57B4704298A808400E5DA64 /* MainViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewUITests.swift; sourceTree = "<group>"; };
 		E57B4706298A808400E5DA64 /* LearnUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E57B4714298A80CC00E5DA64 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		E57B4715298A80CC00E5DA64 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +168,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E533030129901421009806E9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E56C5095298ECE7E00C6352A /* LessonsScreenTests */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		E5539F08298D7F1E002271C2 /* PersistentStorages */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,7 +224,7 @@
 		E56C508E298EC36F00C6352A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				E56C5095298ECE7E00C6352A /* LessonsScreenTests */,
+				E533030129901421009806E9 /* ViewModels */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -299,7 +307,7 @@
 		E57B4703298A808400E5DA64 /* LearnUITests */ = {
 			isa = PBXGroup;
 			children = (
-				E57B4704298A808400E5DA64 /* LearnUITests.swift */,
+				E57B4704298A808400E5DA64 /* MainViewUITests.swift */,
 				E57B4706298A808400E5DA64 /* LearnUITestsLaunchTests.swift */,
 			);
 			path = LearnUITests;
@@ -740,7 +748,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E57B4705298A808400E5DA64 /* LearnUITests.swift in Sources */,
+				E57B4705298A808400E5DA64 /* MainViewUITests.swift in Sources */,
 				E57B4707298A808400E5DA64 /* LearnUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

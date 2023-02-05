@@ -50,7 +50,6 @@ final class FetchLessonsUseCaseTests: XCTestCase {
         XCTAssertNotNil(repoMock.error)
     }
     
-    
     func testFetchLessonsUseCase_whenSuccessfullyFetchesLessons() throws {
         // given
         let expectation = self.expectation(description: "Fetch Lessons UseCase Successfully")

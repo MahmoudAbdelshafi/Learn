@@ -37,10 +37,11 @@ struct MainView<T : MainLessonsViewModel> : View {
                                                                                    nextLessons: viewModel.filterNextLessonsArray(index: index))) {
                         LessonCellView(imageURL: lesson.thumbnail,
                                        title: lesson.name)
-                    }
+                    }.accessibilityIdentifier("cell_\(lesson.id)") /// USED for UITesing purposes
                     .foregroundColor(Color.blue)
                 }
             }
+            .accessibilityIdentifier("LessonsList") /// USED for UITesing purposes
             .navigationTitle("Lessons")
         }
         .onAppear {
