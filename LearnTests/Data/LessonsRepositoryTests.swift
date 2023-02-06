@@ -53,7 +53,6 @@ final class LessonsRepositoryTests: XCTestCase {
         XCTAssertNotNil(useCase.error)
     }
     
-    
     func testExecuteLessonsUseCase_whenSuccessLessonsExecution()  {
         // given
         let expectation = self.expectation(description: "execute UseCase success")
