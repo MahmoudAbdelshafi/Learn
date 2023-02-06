@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E51C45DC2990EF4E00AAE1DE /* LessonsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51C45DB2990EF4E00AAE1DE /* LessonsRepositoryTests.swift */; };
 		E5539F07298D15B9002271C2 /* VideosDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F06298D15B9002271C2 /* VideosDownloadManager.swift */; };
 		E5539F0E298D7FF9002271C2 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E5539F0C298D7FF9002271C2 /* CoreDataStorage.xcdatamodeld */; };
 		E5539F10298D8117002271C2 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539F0F298D8117002271C2 /* CoreDataStorage.swift */; };
@@ -80,6 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E51C45DB2990EF4E00AAE1DE /* LessonsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRepositoryTests.swift; sourceTree = "<group>"; };
 		E5539F06298D15B9002271C2 /* VideosDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosDownloadManager.swift; sourceTree = "<group>"; };
 		E5539F0D298D7FF9002271C2 /* CoreDataStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataStorage.xcdatamodel; sourceTree = "<group>"; };
 		E5539F0F298D8117002271C2 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				E56C508F298EC3E100C6352A /* RepoMock */,
+				E51C45DB2990EF4E00AAE1DE /* LessonsRepositoryTests.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -731,6 +734,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E56C5092298EC45600C6352A /* BaseRepoMock.swift in Sources */,
+				E51C45DC2990EF4E00AAE1DE /* LessonsRepositoryTests.swift in Sources */,
 				E56C509E298ED2AD00C6352A /* FetchLessonsUseCaseTests.swift in Sources */,
 				E56C5099298ED08900C6352A /* MainLessonsViewModelMock.swift in Sources */,
 			);

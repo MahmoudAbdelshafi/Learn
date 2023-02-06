@@ -42,8 +42,6 @@ final class MainLessonsViewModelMock: XCTestCase {
         XCTAssertEqual(fetchLessonsUseCaseMock.error, FetchLessonsUseCaseTestingError.faildFetchingLessons)
     }
     
-    
-    
     enum FetchLessonsUseCaseTestingError: Error {
         case faildFetchingLessons
     }
